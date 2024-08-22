@@ -11,7 +11,7 @@ import (
 func Register(ctx *fiber.Ctx) error {
 	user := &dto.User{}
 	if err := ctx.BodyParser(user); err != nil {
-		return err
+		return &fiber.Error{Code: 400, Message: err.Error()}
 	}
 
 	if user.Username == "" {
@@ -44,7 +44,7 @@ func Login(ctx *fiber.Ctx) error {
 	users := db.GetUserList()
 	loginUser := &dto.User{}
 	if err := ctx.BodyParser(loginUser); err != nil {
-		return err
+		return &fiber.Error{Code: 400, Message: err.Error()}
 	}
 	for _, u := range users {
 		if u.Username == loginUser.Username {

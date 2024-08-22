@@ -19,3 +19,25 @@ Content-Type: application/json
     "username": "admin3",
     "password": "1234567"
 }
+
+###
+POST {{baseUrl}}/api/book/create
+Content-Type: application/json
+
+{
+    "name": "水浒传2",
+    "author": "施耐庵",
+    "description": "cccccc22",
+    "cover": "yx.png"
+}
+
+
+###
+GET {{baseUrl}}/api/book/63730
+
+
+###
+GET {{baseUrl}}/api/book/list
+
+###
+DELETE {{baseUrl}}/api/book/delete/63730
