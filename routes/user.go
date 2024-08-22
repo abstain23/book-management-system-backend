@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"book_management/dto"
+	"book_management/services"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -9,12 +9,13 @@ import (
 func initUserRouter(router fiber.Router) {
 	userGroup := router.Group("/user")
 	userGroup.Post("/register", register)
+	userGroup.Post("/login", login)
 }
 
-func register(ctx *fiber.Ctx) error{
-	user := &dto.User{}
-	if err := ctx.BodyParser(user); err != nil {
-		return err
-	}
-	return ctx.JSON(fiber.Map{"code": 0, "message": "success", "data": user.Username + " register success"})
+func register(ctx *fiber.Ctx) error {
+	return services.Register(ctx)
+}
+
+func login(ctx *fiber.Ctx) error {
+	return services.Login(ctx)
 }
