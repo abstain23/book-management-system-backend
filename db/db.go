@@ -6,6 +6,10 @@ import (
 )
 
 func init() {
+	if _, err := os.Stat("storage"); os.IsNotExist(err) {
+		os.Mkdir("storage", 0755)
+		fmt.Println("创建目录 storage 成功。")
+	}
 	initFile(userFilePath)
 	initFile(bookFilePath)
 }
@@ -28,7 +32,7 @@ func write(path string, data []byte) error {
 
 func initFile(path string) {
 	if _, err := os.Stat(path); os.IsNotExist(err) {
-		err := os.WriteFile(path, []byte("[]"), 0644)
+		err = os.WriteFile(path, []byte("[]"), 0644)
 		if err != nil {
 			fmt.Printf("创建文件 %s 时发生错误: %v\n", path, err)
 			return
