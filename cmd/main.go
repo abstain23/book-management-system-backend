@@ -1,6 +1,7 @@
 package main
 
 import (
+	"book_management/middleware"
 	"book_management/routes"
 	"errors"
 	"log"
@@ -31,11 +32,13 @@ func main() {
 
 	app.Use(cors.New())
 
-	app.Static("/static", "storage")
-
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, World 👋!")
 	})
+
+	app.Use(middleware.JWtMiddleware())
+
+	app.Static("/static", "storage")
 
 	routes.Init(app)
 

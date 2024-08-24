@@ -6,6 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+
 func initBookRouter(router fiber.Router) {
 	bookGroup := router.Group("/book")
 	bookGroup.Get("/list", list)

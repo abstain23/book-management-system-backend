@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 func GetBookList(ctx *fiber.Ctx) error {
@@ -29,6 +30,10 @@ func GetBookById(ctx *fiber.Ctx) error {
 }
 
 func AddBook(ctx *fiber.Ctx) error {
+	username := utils.ParseJwt(ctx.Locals("user").(*jwt.Token))
+
+	fmt.Printf("username: %v\n", username)
+
 	book := new(dto.Book)
 	if err := ctx.BodyParser(book); err != nil {
 		return &fiber.Error{Code: 400, Message: err.Error()}
@@ -49,8 +54,6 @@ func AddBook(ctx *fiber.Ctx) error {
 	if book.Description == "" {
 		book.Description = "暂无描述"
 	}
-
-	
 
 	err := db.AddBook(book)
 

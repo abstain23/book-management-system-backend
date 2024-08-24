@@ -1,11 +1,14 @@
 package services
 
 import (
+	"book_management/constants"
 	"book_management/db"
 	"book_management/dto"
 	"book_management/utils"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 func Register(ctx *fiber.Ctx) error {
@@ -49,7 +52,18 @@ func Login(ctx *fiber.Ctx) error {
 	for _, u := range users {
 		if u.Username == loginUser.Username {
 			if u.Password == loginUser.Password {
-				return ctx.JSON(utils.SuccessResponse(nil))
+				claims := jwt.MapClaims{
+					"username": u.Username,
+					"exp": time.Now().Add(time.Hour * 24).Unix(),
+				}
+
+				token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+				tokenString, err := token.SignedString([]byte(constants.JWT_SECRET))
+				if err != nil {
+					return &fiber.Error{Code: fiber.StatusInternalServerError, Message: err.Error()}
+				}
+
+				return ctx.JSON(utils.SuccessResponse(tokenString))
 			} else {
 				return &fiber.Error{Code: 400, Message: "密码错误"}
 			}

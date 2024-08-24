@@ -23,6 +23,7 @@ Content-Type: application/json
 ###
 POST {{baseUrl}}/api/book/create
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjQ1OTY5MDUsInVzZXJuYW1lIjoiYWRtaW4zIn0.ZwvpjmJDocGrEsda0SuIGqtQPLpwIYd-uxPJSelHENE
 
 {
     "name": "水浒传2",
