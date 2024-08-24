@@ -116,5 +116,5 @@ func Upload(ctx *fiber.Ctx) error {
 	if err := ctx.SaveFile(file, "storage/"+file.Filename); err != nil {
 		return &fiber.Error{Code: 400, Message: err.Error()}
 	}
-	return ctx.JSON(utils.SuccessResponse(nil))
+	return ctx.JSON(utils.SuccessResponse("/static/" + file.Filename))
 }

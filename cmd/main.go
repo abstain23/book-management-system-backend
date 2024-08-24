@@ -31,6 +31,8 @@ func main() {
 
 	app.Use(cors.New())
 
+	app.Static("/static", "storage")
+
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, World 👋!")
 	})
