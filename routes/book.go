@@ -13,7 +13,7 @@ func initBookRouter(router fiber.Router) {
 	bookGroup.Post("/create", create)
 	bookGroup.Put("/update", update)
 	bookGroup.Delete("/delete/:id", delete)
-
+	bookGroup.Post("/upload", upload)
 }
 
 func list(ctx *fiber.Ctx) error {
@@ -34,4 +34,8 @@ func update(ctx *fiber.Ctx) error {
 
 func delete(ctx *fiber.Ctx) error {
 	return services.DeleteBook(ctx)
+}
+
+func upload(ctx *fiber.Ctx) error {
+	return services.Upload(ctx)
 }

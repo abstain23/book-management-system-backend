@@ -41,3 +41,27 @@ GET {{baseUrl}}/api/book/list
 
 ###
 DELETE {{baseUrl}}/api/book/delete/63730
+
+
+###
+PUT {{baseUrl}}/api/book/update
+Content-Type: application/json
+
+{
+    "id": 84272,
+    "name": "水浒传3",
+    "author": "施耐庵",
+    "description": "cccccc22",
+    "cover": "yx.png"
+}
+
+
+###
+POST {{baseUrl}}/api/book/upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="aa.png"
+Content-Type: binary
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
